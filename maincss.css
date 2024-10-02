@@ -16,8 +16,8 @@ body {
     background-repeat: repeat-y;
     background-position: right;
     background-attachment: fixed;
-    background-size: 350px;
-    ;
+    background-size: 500px;
+
 }
 
 a:focus,
@@ -49,25 +49,6 @@ header img {
 main {
     clear: left;
 }
-
-main div.contacts {
-    margin: 3em 2em 1.5em;
-    border: 5px double blue;
-    border-radius: 20px;
-    box-shadow: 3px 3px 4px 4px red;
-    padding: 1em;
-    font-size: 105%;
-}
-
-main nav {
-    margin: 3em 2em 1.5em;
-    border: 5px double blue;
-    border-radius: 20px;
-    box-shadow: 3px 3px 4px 4px red;
-    padding: 1em;
-    font-size: 105%;
-}
-
 main h3 {
     margin: 3em 2em 1.5em;
     border: 5px double blue;
@@ -76,7 +57,22 @@ main h3 {
     padding: 1em;
     font-size: 105%;
 }
-
+main nav {
+    margin: 1.5em 2em 1.5em;
+    border: 5px dashed blue;
+    border-radius: 20px;
+    box-shadow: 3px 3px 4px 4px red;
+    padding: .5em;
+    font-size: 105%;
+}
+main div.contacts {
+    margin: 1.5em 2em 0em 2em;
+    border: 5px dotted blue;
+    border-radius: 20px;
+    box-shadow: 3px 3px 4px 4px red;
+    padding: 1em;
+    font-size: 105%;
+}
 #list {
     line-height: 1.5em;
 }
