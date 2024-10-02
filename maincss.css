@@ -23,7 +23,7 @@ body {
 a:focus,
 a:hover {
     font-style: italic;
-    color: orangered;
+    color: orangered; 
 }
 
 header h1 {
@@ -40,6 +40,7 @@ header h2 {
 
 header img {
     float: left;
+    margin: 2em;
 }
 
 .shadow {
