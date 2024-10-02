@@ -16,7 +16,7 @@ body {
     background-repeat: repeat-y;
     background-position: right;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: 500px;
 }
 
 a:focus,
