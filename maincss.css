@@ -9,7 +9,7 @@ body {
     font-size: 100%;
     margin: 15px auto;
     padding: 15px 1.5em;
-    border: 1px solid blue;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 25px;
     box-shadow: 5px 5px 0 0;
     background-image: url("images/repLogo.png");
@@ -17,7 +17,6 @@ body {
     background-position: right;
     background-attachment: fixed;
     background-size: 350px;
-    transform: rotate(-10deg);
     ;
 }
 
@@ -51,8 +50,7 @@ main {
     clear: left;
 }
 
-main div,
-contacts {
+main div.contacts {
     margin: 3em 2em 1.5em;
     border: 5px double blue;
     border-radius: 20px;
