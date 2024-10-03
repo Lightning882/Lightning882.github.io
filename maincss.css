@@ -82,7 +82,8 @@ main div.contacts {
     line-height: 1.5em;
 }
 
-footer {
+footer p.copyright{
+    text-align: center;
     font-size: 80%;
-    margin: auto 0;
+    margin: 0 auto;
 }
