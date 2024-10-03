@@ -85,5 +85,7 @@ main div.contacts {
 footer p.copyright{
     text-align: center;
     font-size: 80%;
+}
+footer div.center{
     margin: 0 auto;
 }
