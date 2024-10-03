@@ -23,7 +23,7 @@ body {
 a:focus,
 a:hover {
     font-style: italic;
-    color: orangered; 
+    color: orangered;
 }
 
 header h1 {
@@ -50,6 +50,7 @@ header img {
 main {
     clear: left;
 }
+
 main h3 {
     margin: 3em 2em 1.5em;
     border: 5px double blue;
@@ -58,6 +59,7 @@ main h3 {
     padding: 1em;
     font-size: 105%;
 }
+
 main nav {
     margin: 1.5em 2em 1.5em;
     border: 5px dashed blue;
@@ -66,6 +68,7 @@ main nav {
     padding: .5em;
     font-size: 105%;
 }
+
 main div.contacts {
     margin: 1.5em 2em 0em 2em;
     border: 5px dotted blue;
@@ -74,11 +77,12 @@ main div.contacts {
     padding: 1em;
     font-size: 105%;
 }
+
 #list {
     line-height: 1.5em;
 }
 
-footer p.copyright {
+footer {
     text-align: center;
     font-size: 80%;
     margin: auto 0
