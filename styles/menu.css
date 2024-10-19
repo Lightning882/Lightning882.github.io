@@ -22,3 +22,6 @@ article ol {
 aside ul {
     list-style-type: square;
 }
+p.line {
+    font-size: 14px;
+}
