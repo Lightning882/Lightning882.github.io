@@ -160,13 +160,16 @@
     gap: 10px;
   }
   
-  .product-card .buttons button {
+  .product-card .buttons button,
+  .product-card .buttons a {
     flex: 1;
     padding: 8px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
     transition: background-color 0.3s ease;
   }
   

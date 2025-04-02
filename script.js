@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Updated Categories (removing Face and Aesthetics)
+    // Categories (using the simplified structure)
     const categories = [
       "All",
       "Weight Loss",
       "IV Hydration & Injections",
       "Buy Now Online"
     ];
-  
     let selectedCategory = "All";
     let searchQuery = "";
   
-    // Updated Product List
+    // Product list (for main page)
     const products = [
       // Weight Loss
       { name: "Amino Acid Fat-Burning Injections", price: "$--", description: "Boost metabolism and support weight loss.", category: "Weight Loss" },
@@ -44,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: "Glutathione Gummies (60 count)", price: "$30", description: "Antioxidant gummies for immune and skin health.", category: "Buy Now Online" }
     ];
   
-    // ============ CART FUNCTIONALITY ============
-    // The cart is now an array of objects: { product, quantity }
+    // ========= CART FUNCTIONALITY =========
+    // The cart is an array of objects: { product, quantity }
     let cart = [];
   
     function addToCart(product) {
@@ -68,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCartItems() {
       const cartItemsContainer = document.getElementById('cart-items');
       cartItemsContainer.innerHTML = "";
-  
       cart.forEach((item, index) => {
         const itemDiv = document.createElement("div");
         itemDiv.className = "cart-item";
@@ -133,14 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
         cartItemsContainer.appendChild(itemDiv);
       });
-  
       updateCartTotal();
     }
   
     function updateCartTotal() {
       let total = 0;
       cart.forEach(item => {
-        // Parse price assuming format "$30"
+        // Assuming price format like "$30"
         const priceNumber = parseFloat(item.product.price.replace("$", ""));
         total += priceNumber * item.quantity;
       });
@@ -148,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;
     }
   
-    // ============ CART OVERLAY ============
+    // ========= CART OVERLAY =========
     const cartButton = document.getElementById("cart-button");
     const cartOverlay = document.getElementById("cart-overlay");
     const closeCartButton = document.getElementById("close-cart");
@@ -161,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cartOverlay.classList.remove("active");
     });
   
-    // ============ PRODUCT DISPLAY & SEARCH ============
+    // ========= PRODUCT DISPLAY & SEARCH =========
     const categoriesContainer = document.querySelector('.categories');
     const productGrid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
@@ -219,11 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnsDiv = document.createElement("div");
         btnsDiv.className = "buttons";
   
-        const infoBtn = document.createElement("button");
-        infoBtn.className = "info-btn";
-        infoBtn.textContent = "More Info";
-        btnsDiv.appendChild(infoBtn);
+        // More Info link
+        const infoLink = document.createElement("a");
+        infoLink.className = "info-btn";
+        infoLink.textContent = "More Info";
+        /* 
+           For each product, assume you have created a dedicated "More Info" page.
+           The filename can be constructed by removing spaces and special characters.
+           For example, "Amino Acid Fat-Burning Injections" becomes "more-info-AminoAcidFatBurningInjections.html"
+        */
+        const fileName = "more-info-" + product.name.replace(/[^a-zA-Z0-9]/g, "") + ".html";
+        infoLink.href = fileName;
+        btnsDiv.appendChild(infoLink);
   
+        // If product belongs to "Buy Now Online", add "Add to Cart" button
         if (product.category === "Buy Now Online") {
           const addToCartBtn = document.createElement("button");
           addToCartBtn.className = "buy-btn";
@@ -248,3 +254,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
   });
+  
