@@ -190,9 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = document.createElement("div");
         card.className = "product-card";
   
-        // Product image (using a placeholder)
+        // Product image using Picsum placeholder (300x200)
         const img = document.createElement("img");
-        img.src = "https://via.placeholder.com/300x200";
+        img.src = "https://picsum.photos/seed/placeholder/300/200";
         img.alt = product.name;
         card.appendChild(img);
   
@@ -216,15 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnsDiv = document.createElement("div");
         btnsDiv.className = "buttons";
   
-        // More Info link
+        // More Info link: Construct filename by removing non-alphanumeric characters
         const infoLink = document.createElement("a");
         infoLink.className = "info-btn";
         infoLink.textContent = "More Info";
-        /* 
-           For each product, assume you have created a dedicated "More Info" page.
-           The filename can be constructed by removing spaces and special characters.
-           For example, "Amino Acid Fat-Burning Injections" becomes "more-info-AminoAcidFatBurningInjections.html"
-        */
         const fileName = "more-info-" + product.name.replace(/[^a-zA-Z0-9]/g, "") + ".html";
         infoLink.href = fileName;
         btnsDiv.appendChild(infoLink);
