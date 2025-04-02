@@ -9,7 +9,11 @@
 <body>
   <!-- Header Section -->
   <header class="header">
-    <h1>Explore Our Products & Services</h1>
+    <div class="header-top">
+      <h1>Explore Our Products & Services</h1>
+      <!-- Cart button showing current item count -->
+      <button id="cart-button">Cart (0)</button>
+    </div>
     <p>Browse by category, discover benefits, and purchase select items online</p>
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search products...">
@@ -31,6 +35,17 @@
     <p>&copy; 2025 Medi-Weight & Hydrate. All rights reserved.</p>
     <p>Terms | Privacy Policy | Contact</p>
   </footer>
+
+  <!-- Cart Overlay (hidden by default via transform) -->
+  <div id="cart-overlay" class="cart-overlay">
+    <div class="cart">
+      <h2>Your Cart</h2>
+      <div id="cart-items">
+        <!-- Cart items will be injected here -->
+      </div>
+      <button id="close-cart">Close</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

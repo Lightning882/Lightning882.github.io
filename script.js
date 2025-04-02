@@ -37,7 +37,64 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: "Glutathione Gummies (60 count)", price: "$30", description: "Antioxidant gummies for immune and skin health.", category: "Buy Now Online" }
     ];
   
-    // DOM Elements
+    // Cart functionality
+    let cart = [];
+  
+    function addToCart(product) {
+      cart.push(product);
+      updateCartCount();
+      renderCartItems();
+    }
+  
+    function updateCartCount() {
+      const cartButton = document.getElementById('cart-button');
+      cartButton.textContent = `Cart (${cart.length})`;
+    }
+  
+    function renderCartItems() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = "";
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+  
+        const itemInfo = document.createElement("div");
+        itemInfo.textContent = `${item.name} - ${item.price}`;
+  
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+          removeFromCart(index);
+        });
+  
+        itemDiv.appendChild(itemInfo);
+        itemDiv.appendChild(removeBtn);
+        cartItemsContainer.appendChild(itemDiv);
+      });
+    }
+  
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartCount();
+      renderCartItems();
+    }
+  
+    // DOM Elements for cart overlay
+    const cartButton = document.getElementById("cart-button");
+    const cartOverlay = document.getElementById("cart-overlay");
+    const closeCartButton = document.getElementById("close-cart");
+  
+    // Toggle cart overlay when cart button is clicked
+    cartButton.addEventListener("click", () => {
+      cartOverlay.classList.toggle("active");
+    });
+  
+    // Close cart overlay
+    closeCartButton.addEventListener("click", () => {
+      cartOverlay.classList.remove("active");
+    });
+  
+    // DOM Elements for product display
     const categoriesContainer = document.querySelector('.categories');
     const productGrid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
@@ -100,14 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const infoBtn = document.createElement("button");
         infoBtn.className = "info-btn";
         infoBtn.textContent = "More Info";
-        // Additional functionality for "More Info" can be added here
         btnsDiv.appendChild(infoBtn);
   
+        // If product belongs to the "Buy Now Online" category, add a Buy Now button
         if (product.category === "Buy Now Online") {
           const buyBtn = document.createElement("button");
           buyBtn.className = "buy-btn";
           buyBtn.textContent = "Buy Now";
-          // Additional functionality for "Buy Now" can be added here
+          buyBtn.addEventListener("click", () => {
+            addToCart(product);
+          });
           btnsDiv.appendChild(buyBtn);
         }
   
