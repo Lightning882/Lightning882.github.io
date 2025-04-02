@@ -1,43 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Define categories and product data
-    const categories = ["All", "Weight Loss", "Hydration", "Aesthetics", "Face", "Buy Now Online"];
+    /**
+     * We removed "Face" and "Aesthetics" entirely
+     * and combined all IV drips and single injections
+     * into a single category: "IV Hydration & Injections".
+     */
+  
+    // Updated categories
+    const categories = [
+      "All",
+      "Weight Loss",
+      "IV Hydration & Injections",
+      "Buy Now Online"
+    ];
+  
     let selectedCategory = "All";
     let searchQuery = "";
   
+    // Updated product list
+    // Removed any items from the "Aesthetics" or "Face" category
+    // Renamed "Hydration" to "IV Hydration & Injections"
     const products = [
+      // Weight Loss
       { name: "Amino Acid Fat-Burning Injections", price: "$--", description: "Boost metabolism and support weight loss.", category: "Weight Loss" },
       { name: "Vitamin B12 Injections", price: "$--", description: "Increase energy levels and support overall health.", category: "Weight Loss" },
       { name: "Antioxidant Injections", price: "$--", description: "Glutathione injections to boost immune system and detoxify.", category: "Weight Loss" },
       { name: "Tirzepatide Injections", price: "$150 - $830", description: "Offered in 6-week, 4-week, and single injection packages.", category: "Weight Loss" },
       { name: "Appetite Suppressants", price: "$125", description: "Prescription-strength options with Lipo B or C included.", category: "Weight Loss" },
-      { name: "Lipo B & Lipo C", price: "$20 - $30", description: "Fat-burning injections available in single or double doses.", category: "Hydration" },
-      { name: "Glutathione", price: "$20 - $30", description: "Antioxidant injection for detox and immune boost.", category: "Hydration" },
-      { name: "B12", price: "$20 - $30", description: "Energy-enhancing injection in two dose options.", category: "Hydration" },
-      { name: "Biotin", price: "$30", description: "Promotes skin, hair, and nail health.", category: "Hydration" },
-      { name: "Toradol", price: "$25", description: "Pain relief through anti-inflammatory injection.", category: "Hydration" },
-      { name: "Tri-Immune", price: "$30", description: "Blend of Glutathione, Vitamin C, and Zinc.", category: "Hydration" },
-      { name: "Vitamin C", price: "$30", description: "Immune-boosting vitamin injection.", category: "Hydration" },
-      { name: "NAD", price: "$100", description: "Supports energy production and neurological health.", category: "Hydration" },
-      { name: "Myers' Cocktail", price: "$160", description: "Blend of vitamins for overall wellness.", category: "Hydration" },
-      { name: "Quench", price: "$160", description: "Formulated for rapid rehydration.", category: "Hydration" },
-      { name: "Inner Beauty", price: "$190", description: "Enhance skin, hair, and nails.", category: "Hydration" },
-      { name: "Reboot", price: "$150", description: "Hangover relief and rehydration.", category: "Hydration" },
-      { name: "I'm NEVER Drinking Again", price: "$170", description: "Enhanced hangover solution.", category: "Hydration" },
-      { name: "B-Lean", price: "$160", description: "Boost metabolism and energy.", category: "Hydration" },
-      { name: "Get-Up-&-Go", price: "$140", description: "Boost performance and energy.", category: "Hydration" },
-      { name: "Recovery & Performance", price: "$170", description: "Support muscle recovery and endurance.", category: "Hydration" },
-      { name: "Immunity", price: "$160", description: "Strengthen immune system.", category: "Hydration" },
-      { name: "Tri-Immunity (IV)", price: "$180", description: "Comprehensive immune support.", category: "Hydration" },
-      { name: "Revitalash", price: "$--", description: "Lash, brow, and hair enhancement products.", category: "Aesthetics" },
-      { name: "PCA Skin Care", price: "$--", description: "Customized skincare solutions.", category: "Aesthetics" },
-      { name: "Sensi Peel", price: "$150+", description: "Gentle chemical peel for sensitive skin.", category: "Aesthetics" },
-      { name: "Ultra Peel", price: "$150+", description: "Brightens and improves skin texture.", category: "Aesthetics" },
-      { name: "Pigment Correct Peel", price: "$150+", description: "Targets hyperpigmentation.", category: "Aesthetics" },
+  
+      // IV Hydration & Injections
+      { name: "Lipo B & Lipo C", price: "$20 - $30", description: "Fat-burning injections available in single or double doses.", category: "IV Hydration & Injections" },
+      { name: "Glutathione", price: "$20 - $30", description: "Antioxidant injection for detox and immune boost.", category: "IV Hydration & Injections" },
+      { name: "B12", price: "$20 - $30", description: "Energy-enhancing injection in two dose options.", category: "IV Hydration & Injections" },
+      { name: "Biotin", price: "$30", description: "Promotes skin, hair, and nail health.", category: "IV Hydration & Injections" },
+      { name: "Toradol", price: "$25", description: "Pain relief through anti-inflammatory injection.", category: "IV Hydration & Injections" },
+      { name: "Tri-Immune", price: "$30", description: "Blend of Glutathione, Vitamin C, and Zinc.", category: "IV Hydration & Injections" },
+      { name: "Vitamin C", price: "$30", description: "Immune-boosting vitamin injection.", category: "IV Hydration & Injections" },
+      { name: "NAD", price: "$100", description: "Supports energy production and neurological health.", category: "IV Hydration & Injections" },
+      { name: "Myers' Cocktail", price: "$160", description: "Blend of vitamins for overall wellness.", category: "IV Hydration & Injections" },
+      { name: "Quench", price: "$160", description: "Formulated for rapid rehydration.", category: "IV Hydration & Injections" },
+      { name: "Inner Beauty", price: "$190", description: "Enhance skin, hair, and nails.", category: "IV Hydration & Injections" },
+      { name: "Reboot", price: "$150", description: "Hangover relief and rehydration.", category: "IV Hydration & Injections" },
+      { name: "I'm NEVER Drinking Again", price: "$170", description: "Enhanced hangover solution.", category: "IV Hydration & Injections" },
+      { name: "B-Lean", price: "$160", description: "Boost metabolism and energy.", category: "IV Hydration & Injections" },
+      { name: "Get-Up-&-Go", price: "$140", description: "Boost performance and energy.", category: "IV Hydration & Injections" },
+      { name: "Recovery & Performance", price: "$170", description: "Support muscle recovery and endurance.", category: "IV Hydration & Injections" },
+      { name: "Immunity", price: "$160", description: "Strengthen immune system.", category: "IV Hydration & Injections" },
+      { name: "Tri-Immunity (IV)", price: "$180", description: "Comprehensive immune support.", category: "IV Hydration & Injections" },
+  
+      // Buy Now Online
       { name: "Vita Surge (16oz)", price: "$30", description: "Energy-boosting natural supplement.", category: "Buy Now Online" },
       { name: "Glutathione Gummies (60 count)", price: "$30", description: "Antioxidant gummies for immune and skin health.", category: "Buy Now Online" }
     ];
   
-    // Cart functionality
+    // ============ CART FUNCTIONALITY ============
     let cart = [];
   
     function addToCart(product) {
@@ -94,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cartOverlay.classList.remove("active");
     });
   
-    // DOM Elements for product display
+    // ============ PRODUCT DISPLAY & SEARCH ============
     const categoriesContainer = document.querySelector('.categories');
     const productGrid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
@@ -119,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderProducts() {
       productGrid.innerHTML = "";
       const filteredProducts = products.filter(product => {
-        const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
+        const matchesCategory = (selectedCategory === "All" || product.category === selectedCategory);
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
       });
@@ -157,9 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const infoBtn = document.createElement("button");
         infoBtn.className = "info-btn";
         infoBtn.textContent = "More Info";
+        // You can implement a modal or separate page for detailed info
         btnsDiv.appendChild(infoBtn);
   
-        // If product belongs to the "Buy Now Online" category, add an "Add to Cart" button
+        // Show "Add to Cart" only if it's in "Buy Now Online"
         if (product.category === "Buy Now Online") {
           const addToCartBtn = document.createElement("button");
           addToCartBtn.className = "buy-btn";
