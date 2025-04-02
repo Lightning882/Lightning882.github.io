@@ -17,7 +17,7 @@
     background-color: #f3f4f6;
     text-align: center;
     padding: 20px;
-    position: relative; /* for positioning the cart button */
+    position: relative;
   }
   
   .header-top {
@@ -28,7 +28,7 @@
   }
   
   /* Cart Button - Fixed Position */
-#cart-button {
+  #cart-button {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -41,7 +41,6 @@
     font-size: 1rem;
     z-index: 1001;
   }
-  
   
   /* Header text */
   .header h1 {
@@ -212,7 +211,7 @@
     padding: 20px;
     overflow-y: auto;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(100%); /* hidden off-screen */
+    transform: translateX(100%);
   }
   
   #cart-overlay.active {
@@ -230,20 +229,60 @@
   /* Cart Item Styles */
   .cart-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 5px;
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
   }
   
-  .cart-item button {
-    background-color: #dc2626;
+  /* Quantity Controls */
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .quantity-controls button {
+    background-color: #1d4ed8;
     color: #fff;
     border: none;
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.8rem;
+  }
+  
+  .quantity-controls input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px;
+  }
+  
+  /* Cart Summary and Checkout */
+  #cart-summary {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+  }
+  
+  #cart-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  #checkout-button {
+    background-color: #16a34a;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
   }
   

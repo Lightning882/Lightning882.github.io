@@ -1,11 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * We removed "Face" and "Aesthetics" entirely
-     * and combined all IV drips and single injections
-     * into a single category: "IV Hydration & Injections".
-     */
-  
-    // Updated categories
+    // Updated Categories (removing Face and Aesthetics)
     const categories = [
       "All",
       "Weight Loss",
@@ -16,9 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedCategory = "All";
     let searchQuery = "";
   
-    // Updated product list
-    // Removed any items from the "Aesthetics" or "Face" category
-    // Renamed "Hydration" to "IV Hydration & Injections"
+    // Updated Product List
     const products = [
       // Weight Loss
       { name: "Amino Acid Fat-Burning Injections", price: "$--", description: "Boost metabolism and support weight loss.", category: "Weight Loss" },
@@ -53,58 +45,118 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
   
     // ============ CART FUNCTIONALITY ============
+    // The cart is now an array of objects: { product, quantity }
     let cart = [];
   
     function addToCart(product) {
-      cart.push(product);
+      const existingItem = cart.find(item => item.product.name === product.name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ product, quantity: 1 });
+      }
       updateCartCount();
       renderCartItems();
     }
   
     function updateCartCount() {
       const cartButton = document.getElementById('cart-button');
-      cartButton.textContent = `Cart (${cart.length})`;
+      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartButton.textContent = `Cart (${totalQuantity})`;
     }
   
     function renderCartItems() {
       const cartItemsContainer = document.getElementById('cart-items');
       cartItemsContainer.innerHTML = "";
+  
       cart.forEach((item, index) => {
         const itemDiv = document.createElement("div");
         itemDiv.className = "cart-item";
   
         const itemInfo = document.createElement("div");
-        itemInfo.textContent = `${item.name} - ${item.price}`;
+        itemInfo.textContent = `${item.product.name} - ${item.product.price}`;
   
+        // Quantity Controls
+        const quantityControls = document.createElement("div");
+        quantityControls.className = "quantity-controls";
+  
+        const minusBtn = document.createElement("button");
+        minusBtn.textContent = "-";
+        minusBtn.addEventListener("click", () => {
+          if (item.quantity > 1) {
+            item.quantity--;
+          } else {
+            cart.splice(index, 1);
+          }
+          updateCartCount();
+          renderCartItems();
+        });
+  
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.min = "1";
+        quantityInput.value = item.quantity;
+        quantityInput.addEventListener("change", (e) => {
+          let newQuantity = parseInt(e.target.value);
+          if (isNaN(newQuantity) || newQuantity < 1) {
+            newQuantity = 1;
+          }
+          item.quantity = newQuantity;
+          updateCartCount();
+          renderCartItems();
+        });
+  
+        const plusBtn = document.createElement("button");
+        plusBtn.textContent = "+";
+        plusBtn.addEventListener("click", () => {
+          item.quantity++;
+          updateCartCount();
+          renderCartItems();
+        });
+  
+        quantityControls.appendChild(minusBtn);
+        quantityControls.appendChild(quantityInput);
+        quantityControls.appendChild(plusBtn);
+  
+        // Remove Button
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
         removeBtn.addEventListener("click", () => {
-          removeFromCart(index);
+          cart.splice(index, 1);
+          updateCartCount();
+          renderCartItems();
         });
   
         itemDiv.appendChild(itemInfo);
+        itemDiv.appendChild(quantityControls);
         itemDiv.appendChild(removeBtn);
+  
         cartItemsContainer.appendChild(itemDiv);
       });
+  
+      updateCartTotal();
     }
   
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartCount();
-      renderCartItems();
+    function updateCartTotal() {
+      let total = 0;
+      cart.forEach(item => {
+        // Parse price assuming format "$30"
+        const priceNumber = parseFloat(item.product.price.replace("$", ""));
+        total += priceNumber * item.quantity;
+      });
+      const cartTotalDiv = document.getElementById('cart-total');
+      cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;
     }
   
-    // DOM Elements for cart overlay
+    // ============ CART OVERLAY ============
     const cartButton = document.getElementById("cart-button");
     const cartOverlay = document.getElementById("cart-overlay");
     const closeCartButton = document.getElementById("close-cart");
   
-    // Toggle cart overlay when cart button is clicked
     cartButton.addEventListener("click", () => {
       cartOverlay.classList.toggle("active");
     });
   
-    // Close cart overlay
     closeCartButton.addEventListener("click", () => {
       cartOverlay.classList.remove("active");
     });
@@ -114,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const productGrid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
   
-    // Render category buttons
     function renderCategories() {
       categoriesContainer.innerHTML = "";
       categories.forEach(category => {
@@ -130,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // Render products based on filters
     function renderProducts() {
       productGrid.innerHTML = "";
       const filteredProducts = products.filter(product => {
@@ -172,10 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const infoBtn = document.createElement("button");
         infoBtn.className = "info-btn";
         infoBtn.textContent = "More Info";
-        // You can implement a modal or separate page for detailed info
         btnsDiv.appendChild(infoBtn);
   
-        // Show "Add to Cart" only if it's in "Buy Now Online"
         if (product.category === "Buy Now Online") {
           const addToCartBtn = document.createElement("button");
           addToCartBtn.className = "buy-btn";
@@ -191,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // Event listener for the search input
     searchInput.addEventListener("input", (e) => {
       searchQuery = e.target.value;
       renderProducts();
@@ -201,4 +248,3 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
   });
-  

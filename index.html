@@ -36,12 +36,16 @@
     <p>Terms | Privacy Policy | Contact</p>
   </footer>
 
-  <!-- Cart Overlay (hidden by default via transform) -->
+  <!-- Cart Overlay (hidden by default) -->
   <div id="cart-overlay" class="cart-overlay">
     <div class="cart">
       <h2>Your Cart</h2>
       <div id="cart-items">
         <!-- Cart items will be injected here -->
+      </div>
+      <div id="cart-summary">
+        <div id="cart-total">Total: $0.00</div>
+        <button id="checkout-button">Checkout</button>
       </div>
       <button id="close-cart">Close</button>
     </div>
