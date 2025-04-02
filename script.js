@@ -159,15 +159,15 @@ document.addEventListener('DOMContentLoaded', () => {
         infoBtn.textContent = "More Info";
         btnsDiv.appendChild(infoBtn);
   
-        // If product belongs to the "Buy Now Online" category, add a Buy Now button
+        // If product belongs to the "Buy Now Online" category, add an "Add to Cart" button
         if (product.category === "Buy Now Online") {
-          const buyBtn = document.createElement("button");
-          buyBtn.className = "buy-btn";
-          buyBtn.textContent = "Buy Now";
-          buyBtn.addEventListener("click", () => {
+          const addToCartBtn = document.createElement("button");
+          addToCartBtn.className = "buy-btn";
+          addToCartBtn.textContent = "Add to Cart";
+          addToCartBtn.addEventListener("click", () => {
             addToCart(product);
           });
-          btnsDiv.appendChild(buyBtn);
+          btnsDiv.appendChild(addToCartBtn);
         }
   
         card.appendChild(btnsDiv);
